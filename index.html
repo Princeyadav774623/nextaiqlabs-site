@@ -1,0 +1,876 @@
+<title>nextaiQlabs</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&amp;family=IBM+Plex+Sans:wght@400;450;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+
+<style>
+:root{
+  --ground:#F7F5F2; --surface:#FFFFFF; --surface-2:#EFECE7;
+  --ink:#14161A; --ink-2:#4A4C55; --ink-3:#85878F;
+  --line:#E2DED8;
+  --accent:#C0472A; --accent-ink:#A33A20; --accent-soft:#F6E5DF;
+  --dark:#101216; --dark-2:#171A20; --dark-line:#2A2E38;
+  --dark-ink:#F0EEEB; --dark-ink-2:#9DA1AA; --dark-ink-3:#6B707B;
+  --accent-lite:#E4623F; --accent-dim:#2E1B15;
+  --shell:1200px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ground);color:var(--ink);
+  font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.serif{font-family:"Newsreader",Georgia,"Times New Roman",serif;font-weight:500;letter-spacing:-.022em;text-wrap:balance}
+h1{font-size:clamp(42px,7vw,88px);line-height:.98;margin:0}
+h2{font-size:clamp(29px,4.4vw,50px);line-height:1.07;margin:0 0 18px}
+p{margin:0 0 18px}
+a{color:inherit}
+.kicker{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;font-weight:500;
+        letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin:0 0 20px}
+.lede{font-size:clamp(16.5px,1.8vw,19px);line-height:1.58;color:var(--ink-2);max-width:56ch;margin:0 0 28px}
+.dark .lede{color:var(--dark-ink-2)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+.wrap{max-width:var(--shell);margin:0 auto;padding-inline:clamp(18px,4.5vw,46px)}
+.band{padding-block:clamp(66px,9vw,124px)}
+.band.tight{padding-block:clamp(50px,6.5vw,86px)}
+.dark{background:var(--dark);color:var(--dark-ink)}
+.dark h2,.dark h3{color:var(--dark-ink)}
+
+/* ---------- nav ---------- */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:60;
+     background:rgba(16,18,22,.86);backdrop-filter:blur(14px) saturate(140%);
+     border-bottom:1px solid var(--dark-line)}
+.nav-in{display:flex;align-items:center;gap:20px;padding-block:15px}
+.mark{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:15.5px;font-weight:500;
+      color:var(--dark-ink);text-decoration:none}
+.mark b{color:var(--accent);font-weight:500}
+.nav-links{display:none;gap:26px;margin-left:auto;margin-right:6px}
+@media(min-width:960px){.nav-links{display:flex}}
+.nav-links a{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.11em;
+             text-transform:uppercase;color:var(--dark-ink-2);text-decoration:none;transition:color .15s}
+.nav-links a:hover{color:var(--accent)}
+.nav .btn{margin-left:auto}
+@media(min-width:960px){.nav .btn{margin-left:0}}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+     font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11.5px;font-weight:500;
+     letter-spacing:.1em;text-transform:uppercase;padding:12px 21px;border-radius:2px;
+     text-decoration:none;background:var(--accent);color:#FFF;border:1px solid var(--accent);
+     transition:background .16s ease,transform .16s ease,box-shadow .16s ease}
+.btn:hover{background:var(--accent-ink);border-color:var(--accent-ink);transform:translateY(-1px);
+           box-shadow:0 8px 26px -10px rgba(192,71,42,.85)}
+.btn.ghost{background:transparent;color:var(--dark-ink);border-color:var(--dark-line);box-shadow:none}
+.btn.ghost:hover{background:rgba(255,255,255,.05);border-color:var(--dark-ink-3);box-shadow:none}
+.btn.lg{padding:16px 30px;font-size:12.5px}
+
+/* ---------- hero ---------- */
+.hero{position:relative;background:var(--dark);color:var(--dark-ink);overflow:hidden;isolation:isolate}
+.hero::before{content:"";position:absolute;z-index:-2;width:900px;height:900px;
+  top:-380px;right:-260px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(192,71,42,.30) 0%,rgba(192,71,42,.10) 38%,rgba(192,71,42,0) 68%)}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E")}
+.hero-in{display:grid;grid-template-columns:1fr;gap:52px;align-items:center;
+         padding-block:clamp(58px,8.5vw,116px)}
+@media(min-width:1000px){.hero-in{grid-template-columns:1.06fr .94fr;gap:66px}}
+.hero h1{color:var(--dark-ink)}
+.hero h1 em{font-style:italic;color:var(--accent);font-weight:400}
+.hero .sub{font-size:clamp(16.5px,1.85vw,19.5px);line-height:1.55;color:var(--dark-ink-2);
+           max-width:48ch;margin:28px 0 0}
+.hero-cta{display:flex;flex-wrap:wrap;gap:11px;margin-top:38px}
+.trust{display:flex;flex-wrap:wrap;gap:8px 20px;margin:26px 0 0;padding:0;list-style:none;
+       font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;letter-spacing:.1em;
+       text-transform:uppercase;color:var(--dark-ink-3)}
+.trust li{display:flex;align-items:center;gap:7px}
+.trust li::before{content:"";width:5px;height:5px;background:var(--accent);border-radius:50%;flex:none}
+
+/* hero studio rail */
+.rail{border:1px solid var(--dark-line);border-radius:4px;background:rgba(23,26,32,.7);
+      backdrop-filter:blur(6px);overflow:hidden}
+.rail-hd{display:flex;align-items:center;justify-content:space-between;gap:12px;
+         padding:13px 17px;border-bottom:1px solid var(--dark-line);
+         font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10px;letter-spacing:.14em;
+         text-transform:uppercase;color:var(--dark-ink-3)}
+.rail-hd b{color:var(--accent);font-weight:500}
+.rail-row{display:grid;grid-template-columns:34px 1fr;gap:14px;align-items:baseline;
+          padding:13px 17px;border-bottom:1px solid rgba(42,46,56,.6);cursor:default;
+          transition:background .25s ease}
+.rail-row:last-child{border-bottom:none}
+.rail-row .rn{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;
+              color:var(--dark-ink-3);transition:color .25s ease}
+.rail-row .rname{font-family:"Newsreader",Georgia,serif;font-size:19px;font-weight:500;
+                 letter-spacing:-.015em;color:var(--dark-ink-2);transition:color .25s ease;line-height:1.25}
+.rail-row .rout{display:block;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10px;
+                letter-spacing:.09em;text-transform:uppercase;color:var(--dark-ink-3);
+                margin-top:4px;opacity:0;max-height:0;overflow:hidden;
+                transition:opacity .3s ease,max-height .3s ease}
+.rail-row.on{background:rgba(192,71,42,.09)}
+.rail-row.on .rn{color:var(--accent)}
+.rail-row.on .rname{color:var(--dark-ink)}
+.rail-row.on .rout{opacity:1;max-height:34px;color:var(--accent)}
+.rail-row:hover .rname{color:var(--dark-ink)}
+
+/* ---------- stats ---------- */
+.stats{background:var(--dark-2);border-top:1px solid var(--dark-line)}
+.stats-in{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--dark-line)}
+@media(min-width:840px){.stats-in{grid-template-columns:repeat(4,1fr)}}
+.stat{background:var(--dark-2);padding:28px 24px 30px}
+.stat .n{font-family:"Newsreader",Georgia,serif;font-size:clamp(40px,5vw,56px);font-weight:500;
+         line-height:1;letter-spacing:-.03em;color:var(--accent);font-variant-numeric:tabular-nums}
+.stat .t{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;letter-spacing:.12em;
+         text-transform:uppercase;color:var(--dark-ink-2);margin-top:12px;line-height:1.55}
+
+/* ---------- studios ---------- */
+.sec-head{display:grid;grid-template-columns:1fr;gap:16px;margin-bottom:clamp(38px,5vw,60px)}
+@media(min-width:900px){.sec-head{grid-template-columns:.9fr 1.1fr;gap:56px;align-items:end}}
+.studio{display:grid;grid-template-columns:1fr;gap:24px;background:var(--surface);
+        border:1px solid var(--line);border-radius:5px;margin-bottom:14px;
+        padding:clamp(24px,3.2vw,36px);
+        transition:border-color .2s ease,transform .2s ease,box-shadow .2s ease}
+.studio:hover{border-color:var(--accent);transform:translateY(-2px);
+              box-shadow:0 14px 34px -22px rgba(20,22,26,.55)}
+@media(min-width:880px){.studio{grid-template-columns:250px 1fr;gap:48px}}
+.st-left{display:flex;flex-direction:column;gap:10px}
+.st-num{font-family:"Newsreader",Georgia,serif;font-size:30px;font-weight:500;line-height:1;
+        color:var(--accent);letter-spacing:-.02em;font-variant-numeric:tabular-nums;
+        width:62px;height:62px;flex:none;display:flex;align-items:center;justify-content:center;
+        background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;
+        margin-bottom:6px;transition:background .2s ease,color .2s ease}
+.studio:hover .st-num{background:var(--accent);color:#FFF}
+.st-name{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12.5px;font-weight:500;
+         letter-spacing:.13em;text-transform:uppercase;color:var(--ink)}
+.st-tag{font-family:"Newsreader",Georgia,serif;font-size:25px;font-weight:400;font-style:italic;
+        line-height:1.25;color:var(--ink-2);letter-spacing:-.01em;margin:2px 0 0}
+.st-body{display:flex;flex-direction:column;gap:18px}
+.grp{display:flex;flex-direction:column;gap:9px}
+.grp-t{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10px;font-weight:500;
+       letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin:0;padding:0;list-style:none}
+.chips li{font-size:14px;line-height:1.35;padding:6px 12px;border:1px solid var(--line);
+          border-radius:100px;background:var(--surface);color:var(--ink-2);
+          transition:border-color .16s ease,color .16s ease}
+.chips li:hover{border-color:var(--accent);color:var(--accent-ink)}
+.outcome{display:inline-flex;align-items:center;gap:11px;align-self:flex-start;
+         padding:10px 17px 10px 14px;border-radius:2px;background:var(--accent-soft);
+         border-left:3px solid var(--accent)}
+.outcome span{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:9.5px;letter-spacing:.14em;
+              text-transform:uppercase;color:var(--accent);opacity:.8}
+.outcome b{font-family:"Newsreader",Georgia,serif;font-size:19px;font-weight:500;
+           color:var(--accent-ink);letter-spacing:-.015em}
+
+/* ---------- term plan ---------- */
+.weeks{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);
+       border:1px solid var(--line);border-radius:4px;overflow:hidden}
+@media(min-width:620px){.weeks{grid-template-columns:1fr 1fr}}
+@media(min-width:1000px){.weeks{grid-template-columns:repeat(3,1fr)}}
+.wk{background:var(--surface);padding:18px 20px 20px;display:flex;flex-direction:column;gap:7px;
+    transition:background .16s ease}
+.wk:hover{background:var(--accent-soft)}
+.wk b{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10px;font-weight:500;
+      letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.wk span{font-size:15px;line-height:1.5;color:var(--ink-2)}
+.wk.final{background:var(--accent-soft)}
+.wk.final span{color:var(--ink);font-weight:500}
+
+/* ---------- requirement rows ---------- */
+.split{display:grid;grid-template-columns:1fr;gap:40px;align-items:start}
+@media(min-width:900px){.split{grid-template-columns:.82fr 1.18fr;gap:66px}}
+.reqs{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);
+       border:1px solid var(--line);border-radius:5px;overflow:hidden}
+.req{display:grid;grid-template-columns:1fr;gap:7px;padding:20px 22px 22px;
+     background:var(--surface);transition:background .16s ease}
+.req:hover{background:var(--accent-soft)}
+@media(min-width:760px){.req{grid-template-columns:200px 1fr;gap:28px;align-items:baseline}}
+.req dt{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;font-weight:500;
+        letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin:0}
+.req dd{margin:0;font-size:16.5px;line-height:1.55;color:var(--ink-2)}
+.req dd b{color:var(--ink);font-weight:600}
+.dark .reqs{background:var(--dark-line);border-color:var(--dark-line)}
+.dark .req{background:var(--dark-2);position:relative;overflow:hidden;
+           transition:background .22s ease}
+/* film grain, revealed only on hover so the solid fill matches the accent bands */
+.dark .req::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  opacity:0;transition:opacity .22s ease;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n4'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n4)'/%3E%3C/svg%3E")}
+.dark .req dt,.dark .req dd{position:relative;z-index:1;transition:color .22s ease}
+.dark .req:hover{background:var(--accent)}
+.dark .req:hover::before{opacity:.09}
+.dark .req:hover dt{color:rgba(255,255,255,.82)}
+.dark .req:hover dd{color:#FFF}
+.dark .req:hover dd b{color:#FFF}
+.dark .req dt{color:var(--dark-ink-3)}
+.dark .req dd{color:var(--dark-ink-2)}
+.dark .req dd b{color:var(--dark-ink)}
+
+/* ---------- founder ---------- */
+.founder-band{background:var(--surface)}
+.who{display:grid;grid-template-columns:minmax(0,1fr);gap:32px;align-items:start}
+.who > *{min-width:0}
+@media(min-width:780px){.who{grid-template-columns:minmax(0,290px) minmax(0,1fr);gap:58px}}
+.portrait{width:100%;max-width:290px;height:auto;aspect-ratio:4/5;object-fit:cover;
+          display:block;border-radius:4px;background:#FFF}
+
+/* ---------- cta ---------- */
+.cta{background:var(--accent);color:#FFF;position:relative;overflow:hidden;isolation:isolate}
+.cta::after{content:"";position:absolute;inset:0;z-index:-1;opacity:.07;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n2'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n2)'/%3E%3C/svg%3E")}
+.cta h2{color:#FFF}
+.cta .kicker{color:rgba(255,255,255,.72)}
+.cta .lede{color:rgba(255,255,255,.9)}
+.cta .btn{background:#FFF;color:var(--accent-ink);border-color:#FFF;box-shadow:none}
+.cta .btn:hover{background:rgba(255,255,255,.88);border-color:rgba(255,255,255,.88);box-shadow:none}
+.cta-grid{display:grid;grid-template-columns:1fr;gap:26px;margin-top:42px;
+          padding-top:32px;border-top:1px solid rgba(255,255,255,.28)}
+@media(min-width:680px){.cta-grid{grid-template-columns:repeat(3,1fr)}}
+.cta-grid dt{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10px;letter-spacing:.14em;
+             text-transform:uppercase;color:rgba(255,255,255,.72);margin-bottom:8px}
+.cta-grid dd{margin:0;font-size:18px;line-height:1.4}
+.cta-grid dd a{color:#FFF;text-decoration-thickness:1px;text-underline-offset:3px}
+
+
+/* ---------- scroll progress ---------- */
+.prog{position:absolute;left:0;bottom:-1px;height:2px;width:0;background:var(--accent);
+      transition:width .08s linear;z-index:2}
+
+/* ---------- mobile section nav ---------- */
+.mnav{display:flex;gap:8px;overflow-x:auto;padding:0 0 13px;margin:0;list-style:none;
+      -webkit-overflow-scrolling:touch;scrollbar-width:none}
+.mnav::-webkit-scrollbar{display:none}
+.mnav a{display:block;white-space:nowrap;padding:7px 13px;border-radius:100px;
+        border:1px solid var(--dark-line);color:var(--dark-ink-2);text-decoration:none;
+        font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;letter-spacing:.09em;
+        text-transform:uppercase}
+.mnav a:active{border-color:var(--accent);color:var(--accent)}
+@media(min-width:960px){.mnav{display:none}}
+
+/* ---------- statement bands ---------- */
+.statement{padding-block:clamp(72px,11vw,150px);text-align:center;
+           border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.statement p{font-family:"Newsreader",Georgia,serif;font-weight:400;
+             font-size:clamp(30px,5.6vw,66px);line-height:1.12;letter-spacing:-.025em;
+             max-width:20ch;margin:0 auto;text-wrap:balance;color:var(--ink)}
+.statement em{font-style:italic;color:var(--accent)}
+.statement.dark{border-color:var(--dark-line)}
+.statement.dark p{color:var(--dark-ink)}
+
+
+.statement.accentband{background:var(--accent);color:#FFF;border-top:none;border-bottom:none;
+                      position:relative;overflow:hidden;isolation:isolate}
+.statement.accentband::after{content:"";position:absolute;inset:0;z-index:-1;opacity:.07;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n3'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n3)'/%3E%3C/svg%3E")}
+.statement.accentband p{color:rgba(255,255,255,.84)}
+.statement.accentband em{color:#FFF;font-style:italic}
+.statement.accentband .kicker{color:rgba(255,255,255,.72);margin:0 0 26px}
+
+
+
+/* ---------- imagery ---------- */
+.fullbleed{position:relative;background:var(--dark);line-height:0;isolation:isolate}
+.fullbleed img{width:100%;height:clamp(260px,46vw,580px);object-fit:cover;display:block}
+.fb-cap{position:absolute;left:0;right:0;bottom:0;line-height:1.6;pointer-events:none;
+        padding-block:clamp(40px,7vw,80px) clamp(16px,2.6vw,28px);
+        background:linear-gradient(transparent,rgba(16,18,22,.86))}
+.fb-cap span{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;
+             letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.82)}
+.fb-cap b{color:var(--accent-lite);font-weight:500}
+
+/* ---------- faq ---------- */
+.faq{display:grid;grid-template-columns:1fr;gap:0;border-top:1px solid var(--line)}
+.qa{border-bottom:1px solid var(--line)}
+.qa summary{cursor:pointer;list-style:none;padding-block:22px;display:flex;gap:18px;
+            align-items:baseline;font-size:clamp(17px,2vw,21px);line-height:1.4;
+            font-family:"Newsreader",Georgia,serif;font-weight:500;letter-spacing:-.015em;
+            transition:color .15s}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary::after{content:"+";margin-left:auto;font-family:"IBM Plex Mono",ui-monospace,monospace;
+                   font-size:20px;color:var(--accent);flex:none;transition:transform .2s}
+.qa[open] summary::after{transform:rotate(45deg)}
+.qa summary:hover{color:var(--accent-ink)}
+.qa .ans{padding:0 0 24px 0;max-width:62ch;font-size:16.5px;line-height:1.6;color:var(--ink-2)}
+.qa .ans b{color:var(--ink);font-weight:600}
+
+/* ---------- enquiry form ---------- */
+.formwrap{margin-top:44px;padding-top:34px;border-top:1px solid rgba(255,255,255,.28)}
+.fgrid{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:680px){.fgrid{grid-template-columns:1fr 1fr}}
+.field{display:flex;flex-direction:column;gap:7px}
+.field.wide{grid-column:1/-1}
+.field label{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10px;letter-spacing:.14em;
+             text-transform:uppercase;color:rgba(255,255,255,.78)}
+.field input,.field select,.field textarea{
+  font-family:inherit;font-size:16px;color:#FFF;background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.32);border-radius:2px;padding:13px 14px;width:100%;
+  transition:border-color .15s,background .15s}
+.field input::placeholder,.field textarea::placeholder{color:rgba(255,255,255,.55)}
+.field input:focus,.field select:focus,.field textarea:focus{
+  outline:none;border-color:#FFF;background:rgba(255,255,255,.18)}
+.field select option{color:#14161A}
+.field textarea{resize:vertical;min-height:88px}
+.phonewrap{display:flex;align-items:stretch}
+.phonewrap .pfx{display:flex;align-items:center;padding:0 12px;flex:none;
+  border:1px solid rgba(255,255,255,.32);border-right:none;border-radius:2px 0 0 2px;
+  background:rgba(255,255,255,.09);font-family:"IBM Plex Mono",monospace;
+  font-size:15px;color:rgba(255,255,255,.88)}
+.phonewrap input{border-radius:0 2px 2px 0!important}
+.field input.bad,.field select.bad{border-color:#FFD9CF!important;background:rgba(255,120,90,.18)!important}
+.fhint{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.08em;
+       text-transform:uppercase;color:rgba(255,255,255,.62);margin:0}
+.fstatus{display:none;align-items:center;gap:11px;margin-top:18px;
+         font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;
+         letter-spacing:.11em;text-transform:uppercase;color:#FFF}
+.fstatus.on{display:flex}
+.fstatus.err{color:#FFE2DA}
+.spin{width:14px;height:14px;flex:none;border:2px solid rgba(255,255,255,.35);
+      border-top-color:#FFF;border-radius:50%;animation:nqspin .7s linear infinite}
+@keyframes nqspin{to{transform:rotate(360deg)}}
+#nq-sink{display:none}
+#sent-ok{border:1px solid rgba(255,255,255,.55);border-radius:3px;padding:26px 28px;
+         background:rgba(255,255,255,.13);max-width:560px}
+#sent-ok h3{font-family:"Newsreader",Georgia,serif;font-size:26px;font-weight:500;color:#FFF;margin:0 0 10px}
+#sent-ok p{color:rgba(255,255,255,.9);font-size:16px;line-height:1.55;margin:0 0 6px}
+#sent-ok a{color:#FFF;text-decoration-thickness:1px;text-underline-offset:3px}
+.fsend{display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin-top:20px}
+.fnote{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10px;letter-spacing:.08em;
+       line-height:1.7;color:rgba(255,255,255,.72);max-width:38ch}
+
+footer{background:var(--dark);color:var(--dark-ink-3);padding-block:36px 44px}
+footer .f{display:flex;flex-wrap:wrap;gap:12px 32px;align-items:baseline;
+          font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.08em;line-height:1.9}
+</style>
+
+<nav class="nav">
+  <div class="wrap nav-in">
+    <a class="mark" href="#top">next<b>ai</b>Qlabs</a>
+    <div class="nav-links">
+      <a href="#studios">Studios</a>
+      <a href="#term">Inside a term</a>
+      <a href="#need">What we need</a>
+      <a href="#safeguarding">Safeguarding</a>
+      <a href="#who">Who runs it</a>
+    </div>
+    <a class="btn" href="#talk">Book 20 min</a>
+  </div>
+  <div class="wrap">
+    <ul class="mnav">
+      <li><a href="#studios">Studios</a></li>
+      <li><a href="#term">Inside a term</a></li>
+      <li><a href="#need">What we need</a></li>
+      <li><a href="#safeguarding">Safeguarding</a></li>
+      <li><a href="#faq">Questions</a></li>
+      <li><a href="#who">Who runs it</a></li>
+    </ul>
+  </div>
+  <span class="prog" id="prog"></span>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap hero-in">
+    <div>
+      <p class="kicker">Seven studios &middot; one programme &middot; inside your school</p>
+      <h1>Your students already use AI.<br>Almost none of them can <em>build</em> with it.</h1>
+      <p class="sub">nextaiQlabs runs seven hands-on studios inside your school &mdash; Intelligence, Innovation, Engineering, Creator, Maker, Leadership and Career &mdash; alongside the timetable you already have.</p>
+      <div class="hero-cta">
+        <a class="btn lg" href="#talk">Book 20 minutes</a>
+        <a class="btn lg ghost" href="#term">See a full term</a>
+      </div>
+      <ul class="trust">
+        <li>First term free</li>
+        <li>No contract</li>
+        <li>Nothing to buy</li>
+        <li>Dehradun</li>
+      </ul>
+    </div>
+
+    <div class="rail" id="rail">
+      <div class="rail-hd"><span>The programme</span><span><b>07</b> studios</span></div>
+      <div class="rail-row on"><span class="rn">01</span><span><span class="rname">Intelligence Studio</span><span class="rout">Understand the future</span></span></div>
+      <div class="rail-row"><span class="rn">02</span><span><span class="rname">Innovation Studio</span><span class="rout">Create meaningful solutions</span></span></div>
+      <div class="rail-row"><span class="rn">03</span><span><span class="rname">Engineering Studio</span><span class="rout">Build real products</span></span></div>
+      <div class="rail-row"><span class="rn">04</span><span><span class="rname">Creator Studio</span><span class="rout">Create impactful experiences</span></span></div>
+      <div class="rail-row"><span class="rn">05</span><span><span class="rname">Maker Studio</span><span class="rout">Build real-world physical solutions</span></span></div>
+      <div class="rail-row"><span class="rn">06</span><span><span class="rname">Leadership Studio</span><span class="rout">Become confident leaders</span></span></div>
+      <div class="rail-row"><span class="rn">07</span><span><span class="rname">Career Studio</span><span class="rout">Future-ready professionals</span></span></div>
+    </div>
+  </div>
+</header>
+
+<section class="fullbleed">
+  <img src="kit.jpg" alt="The nextaiQlabs kit laid out: Arduino Uno, ESP32, Raspberry Pi, breadboards, ultrasonic and motion sensors, servo, jumper wires and prototyping parts" loading="lazy" width="2000" height="1333">
+  <div class="wrap fb-cap"><span><b>The kit we bring.</b> Nothing for the school to buy.</span></div>
+</section>
+
+<section class="stats">
+  <div class="wrap"><div class="stats-in">
+    <div class="stat"><div class="n">7</div><div class="t">Studios under<br>one programme</div></div>
+    <div class="stat"><div class="n">2</div><div class="t">Periods a week,<br>one section</div></div>
+    <div class="stat"><div class="n">&#8377;0</div><div class="t">Cost to the school<br>for the first term</div></div>
+    <div class="stat"><div class="n">0</div><div class="t">New equipment<br>you have to buy</div></div>
+  </div></div>
+</section>
+
+<section class="statement accentband">
+  <div class="wrap">
+    <p class="kicker">The gap</p>
+    <p>A chapter on AI is not the same as <em>a student who can build with it.</em></p>
+  </div>
+</section>
+
+<section class="band" id="studios">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="kicker">The studios</p><h2 style="margin:0">Seven studios, one arc.</h2></div>
+      <p class="lede" style="margin:0">Each studio runs in short cycles and ends with something the student built, can demonstrate, and can explain to somebody else. Together they take a student from understanding the technology to standing in front of a room and defending what they made with it.</p>
+    </div>
+
+    <article class="studio">
+      <div class="st-left"><span class="st-num">01</span><span class="st-name">Intelligence Studio</span><p class="st-tag">Learn how the future works.</p></div>
+      <div class="st-body">
+        <div class="grp"><span class="grp-t">Key focus areas</span>
+          <ul class="chips"><li>AI Literacy</li><li>Computational Thinking</li><li>Future Technologies</li><li>Data Literacy</li><li>Responsible AI</li><li>Digital Citizenship</li><li>Prompt Engineering</li><li>AI Research</li></ul></div>
+        <div class="outcome"><span>Outcome</span><b>Understand the Future</b></div>
+      </div>
+    </article>
+
+    <article class="studio">
+      <div class="st-left"><span class="st-num">02</span><span class="st-name">Innovation Studio</span><p class="st-tag">Think like an innovator.</p></div>
+      <div class="st-body">
+        <div class="grp"><span class="grp-t">Key focus areas</span>
+          <ul class="chips"><li>Design Thinking</li><li>Product Thinking</li><li>Ideation</li><li>Problem Solving</li><li>Entrepreneurship</li><li>Startup Basics</li><li>Market Research</li><li>Business Model Canvas</li><li>Pitch Decks</li></ul></div>
+        <div class="outcome"><span>Outcome</span><b>Create Meaningful Solutions</b></div>
+      </div>
+    </article>
+
+    <article class="studio">
+      <div class="st-left"><span class="st-num">03</span><span class="st-name">Engineering Studio</span><p class="st-tag">Build intelligent products.</p></div>
+      <div class="st-body">
+        <div class="grp"><span class="grp-t">Key focus areas</span>
+          <ul class="chips"><li>Programming</li><li>Web Development</li><li>Mobile Apps</li><li>Robotics</li><li>IoT</li><li>Automation</li><li>AI / Computer Vision</li><li>Machine Learning / APIs</li><li>Databases / Cloud</li><li>GitHub / Testing</li><li>Deployment</li></ul></div>
+        <div class="outcome"><span>Outcome</span><b>Build Real Products</b></div>
+      </div>
+    </article>
+
+    <article class="studio">
+      <div class="st-left"><span class="st-num">04</span><span class="st-name">Creator Studio</span><p class="st-tag">Create like a professional.</p></div>
+      <div class="st-body">
+        <div class="grp"><span class="grp-t">Visual design</span><ul class="chips"><li>Canva</li><li>Figma</li><li>UI/UX Basics</li><li>Branding</li><li>Typography</li></ul></div>
+        <div class="grp"><span class="grp-t">Video &amp; story</span><ul class="chips"><li>CapCut</li><li>Reels</li><li>Storytelling</li><li>Screen Recording</li><li>Presentation Craft</li></ul></div>
+        <div class="grp"><span class="grp-t">3D &amp; design</span><ul class="chips"><li>Tinkercad</li><li>3D Printing</li><li>Simple Product Modelling</li></ul></div>
+        <div class="grp"><span class="grp-t">AI creative tools</span><ul class="chips"><li>AI image and text tools, used responsibly</li><li>Knowing when the output is wrong</li></ul></div>
+        <div class="outcome"><span>Outcome</span><b>Create Impactful Experiences</b></div>
+      </div>
+    </article>
+
+    <article class="studio">
+      <div class="st-left"><span class="st-num">05</span><span class="st-name">Maker Studio</span><p class="st-tag">Build physical innovations.</p></div>
+      <div class="st-body">
+        <div class="grp"><span class="grp-t">Electronics</span><ul class="chips"><li>Arduino</li><li>Raspberry Pi</li><li>ESP32</li><li>Sensors</li><li>Circuits</li><li>PCB Basics</li></ul></div>
+        <div class="grp"><span class="grp-t">Robotics</span><ul class="chips"><li>Robot Design</li><li>Servo Motors</li><li>Chassis</li><li>Line-Following Bots</li></ul></div>
+        <div class="grp"><span class="grp-t">Smart systems</span><ul class="chips"><li>Smart Home</li><li>Agri-Tech Sensors</li><li>Water and Energy Monitoring</li></ul></div>
+        <div class="grp"><span class="grp-t">Prototyping</span><ul class="chips"><li>3D Design</li><li>3D Printing</li><li>Product Sketching</li><li>Assembly</li></ul></div>
+        <div class="outcome"><span>Outcome</span><b>Build Real-World Physical Solutions</b></div>
+      </div>
+    </article>
+
+    <article class="studio">
+      <div class="st-left"><span class="st-num">06</span><span class="st-name">Leadership Studio</span><p class="st-tag">Teach students how to lead.</p></div>
+      <div class="st-body">
+        <div class="grp"><span class="grp-t">Key focus areas</span>
+          <ul class="chips"><li>Communication</li><li>Public Speaking / Debate</li><li>Leadership / Teamwork</li><li>Emotional Intelligence</li><li>Interview Skills</li><li>Networking</li><li>Time Management</li></ul></div>
+        <div class="outcome"><span>Outcome</span><b>Become Confident Leaders</b></div>
+      </div>
+    </article>
+
+    <article class="studio">
+      <div class="st-left"><span class="st-num">07</span><span class="st-name">Career Studio</span><p class="st-tag">Teach future readiness.</p></div>
+      <div class="st-body">
+        <div class="grp"><span class="grp-t">Key focus areas</span>
+          <ul class="chips"><li>Resume Writing</li><li>LinkedIn / GitHub setup</li><li>Portfolio Website</li><li>College &amp; Startup Guidance</li><li>Freelancing Basics</li><li>Internship Readiness</li></ul></div>
+        <div class="outcome"><span>Outcome</span><b>Future-Ready Professionals</b></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="band" id="term" style="background:var(--surface-2)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="kicker">Inside a term</p><h2 style="margin:0">Twelve sessions, one shipped product.</h2></div>
+      <p class="lede" style="margin:0">The question we are asked most is what actually happens in the room. Here is a full Engineering Studio term, session by session. Every student walks out with a working product on a live URL and the ability to explain how it was built.</p>
+    </div>
+    <div class="weeks">
+      <div class="wk"><b>Session 01</b><span>What the machine is actually doing. First program, first bug, first fix.</span></div>
+      <div class="wk"><b>Session 02</b><span>Thinking in steps &mdash; logic, loops, and breaking a problem into parts.</span></div>
+      <div class="wk"><b>Session 03</b><span>Build a web page that is genuinely yours, not a template.</span></div>
+      <div class="wk"><b>Session 04</b><span>Make it interactive. Forms, state, and what happens on a click.</span></div>
+      <div class="wk"><b>Session 05</b><span>Talking to an API &mdash; your code calls somebody else's and gets an answer back.</span></div>
+      <div class="wk"><b>Session 06</b><span>First AI feature. A real model doing real work inside your own app.</span></div>
+      <div class="wk"><b>Session 07</b><span>Computer vision. The camera sees something and the program reacts.</span></div>
+      <div class="wk"><b>Session 08</b><span>Data and databases &mdash; where the work lives when the browser closes.</span></div>
+      <div class="wk"><b>Session 09</b><span>GitHub. Version control, and why you will be grateful for it later.</span></div>
+      <div class="wk"><b>Session 10</b><span>Testing &mdash; finding the problem before somebody else does.</span></div>
+      <div class="wk"><b>Session 11</b><span>Deployment. It goes live, on a real URL, that a parent can open.</span></div>
+      <div class="wk final"><b>Session 12</b><span>Demo day. The student presents, and the room is allowed to ask hard questions.</span></div>
+    </div>
+    <p class="lede" style="margin:26px 0 0;max-width:62ch;font-size:15.5px;color:var(--ink-3)">Sample arc for one studio. The other six run the same way &mdash; short cycles, a finished artefact, and a demo the student has to stand behind.</p>
+  </div>
+</section>
+
+<section class="band" id="need">
+  <div class="wrap split">
+    <div>
+      <p class="kicker">The ask</p>
+      <h2>What we need from your school</h2>
+      <p class="lede" style="margin-bottom:0">It is the first thing every school asks, so here it is before you ask it. For the pilot term the answer is deliberately small.</p>
+    </div>
+    <dl class="reqs">
+      <div class="req"><dt>Space</dt><dd><b>Your existing computer lab is fine.</b> One room with power. We do not need a dedicated space.</dd></div>
+      <div class="req"><dt>Time</dt><dd>Two periods a week, one section. We work around your timetable, not across it.</dd></div>
+      <div class="req"><dt>Your staff</dt><dd><b>No teaching load on your faculty.</b> One point of contact who sits in. We run the sessions.</dd></div>
+      <div class="req"><dt>Equipment</dt><dd><b>No purchase.</b> We bring our own kit for the pilot term and take it away afterwards.</dd></div>
+      <div class="req"><dt>Cost</dt><dd><b>Nothing for the first term.</b> No contract, no notice period, no obligation once it ends.</dd></div>
+      <div class="req"><dt>What you keep</dt><dd>Everything the students build, and the session plans we used to get there.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="band dark" id="safeguarding">
+  <div class="wrap split">
+    <div>
+      <p class="kicker">Safeguarding</p>
+      <h2>Before anyone walks onto your campus</h2>
+      <p class="lede" style="margin-bottom:0">A boarding or day school carries a duty of care that a visiting programme has to meet, not assume. These are commitments in writing, from day one of a pilot.</p>
+    </div>
+    <dl class="reqs">
+      <div class="req"><dt>Verification</dt><dd>Police verification on file for every person entering campus, shared with your office before the first session.</dd></div>
+      <div class="req"><dt>Supervision</dt><dd><b>No nextaiQlabs person is ever alone with a student.</b> A member of your staff is present in every session.</dd></div>
+      <div class="req"><dt>Student data</dt><dd>We collect no personal data on minors. Student work stays on school systems or goes home with the student.</dd></div>
+      <div class="req"><dt>Photography</dt><dd>No photograph, video or student name is published by us without written consent from the school and the parent.</dd></div>
+      <div class="req"><dt>Your rules win</dt><dd>We follow your visitor, device and conduct policy as written. Where ours differs, yours applies.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="band" id="fit">
+  <div class="wrap split">
+    <div><p class="kicker">Curriculum fit</p><h2>Alongside your board, not against it</h2></div>
+    <div>
+      <p class="lede">Nothing is removed from your syllabus and no board teaching time is given up. The studios run in the space schools already use for skill and activity periods.</p>
+      <p class="lede">NEP 2020 pushed schools toward experiential and skill-based learning, and CBSE now offers Artificial Intelligence as a skill subject. Both are the right direction, and both leave the same gap: a chapter on AI is not the same as a student who can build with it. The studios are where the building happens.</p>
+      <p class="lede" style="margin-bottom:0">What comes out is portfolio work &mdash; things a student can show at a board viva, a university interview, or to a parent on a Sunday afternoon. That is the part one family repeats to another.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="faq" style="background:var(--surface-2)">
+  <div class="wrap split">
+    <div>
+      <p class="kicker">Questions</p>
+      <h2>The questions that come first</h2>
+      <p class="lede" style="margin-bottom:0">Eight questions that come up in almost every conversation, answered here rather than in a meeting.</p>
+    </div>
+    <div class="faq">
+      <details class="qa"><summary>Our teachers don't know AI. Is that a problem?</summary>
+        <div class="ans">No, and it is the most common worry. <b>We run every session ourselves.</b> Your staff member sits in as the school's presence in the room, not as a teacher. If a teacher wants to learn alongside the students, they are welcome, but nothing depends on it.</div></details>
+      <details class="qa"><summary>Will this take time away from board preparation?</summary>
+        <div class="ans">No board teaching time is given up. The studios run in the periods your school already uses for skill, activity or club work &mdash; two a week, one section. <b>Nothing is removed from your syllabus.</b></div></details>
+      <details class="qa"><summary>Do we have to buy computers or equipment?</summary>
+        <div class="ans">No. We bring our own kit for the pilot term and take it away at the end. Your existing computer lab is enough &mdash; we need a room with power, not new hardware.</div></details>
+      <details class="qa"><summary>What happens after the free first term?</summary>
+        <div class="ans">Nothing automatic. There is no contract and no notice period, so the programme simply ends unless you want it to continue. <b>If you do, we agree terms then</b> &mdash; after you have seen a full term of work, not before.</div></details>
+      <details class="qa"><summary>Which classes is this for?</summary>
+        <div class="ans">Classes 6 to 12. The studios scale with the group &mdash; a Class 6 batch and a Class 11 batch run the same arc at different depth. We usually suggest starting with one middle-school section.</div></details>
+      <details class="qa"><summary>How many students can take part?</summary>
+        <div class="ans">One section per studio for the pilot term, so the group stays small enough that every student finishes with something of their own. Scaling to more sections is a conversation for after the pilot.</div></details>
+      <details class="qa"><summary>Can we start part-way through a term?</summary>
+        <div class="ans">Yes. The arc is twelve sessions, so it fits inside most terms with room to spare, and we can begin whenever your timetable has space.</div></details>
+      <details class="qa"><summary>What about student safety and background checks?</summary>
+        <div class="ans">Police verification is on file for every person who enters campus and is shared with your office before the first session. <b>No nextaiQlabs person is ever alone with a student.</b> Full detail is in the safeguarding section above.</div></details>
+    </div>
+  </div>
+</section>
+
+<section class="statement dark">
+  <div class="wrap"><p>By session twelve, they have shipped <em>something real.</em></p></div>
+</section>
+
+<section class="band founder-band" id="who">
+  <div class="wrap">
+    <p class="kicker">Who runs it</p>
+    <h2 style="margin-bottom:38px">Who will be in the room</h2>
+    <div class="who">
+      <img class="portrait" src="prince.jpg" alt="Prince Yadav, founder of nextaiQlabs" width="880" height="1100">
+      <div>
+        <h3 style="font-size:32px;margin:0 0 8px">Prince Yadav</h3>
+        <p class="kicker" style="margin:0 0 22px">Founder &middot; AI Engineer</p>
+        <p class="lede" style="color:var(--ink);font-size:clamp(17.5px,1.9vw,20px)">B.Tech in Computer Science and Engineering, specialising in Artificial Intelligence.</p>
+        <p class="lede">I learned to build. Almost none of it happened in a classroom &mdash; it happened at night, alone, from the internet. Most of my batch graduated the same way: degree in hand, still working out how to make something real.</p>
+        <p class="lede">I would rather a fourteen-year-old did not wait until college to find that out. That is the whole idea.</p>
+        <p class="lede" style="margin-bottom:28px">I run every session myself. The person answering your questions is the person who will be standing in the room.</p>
+        <p class="lede" style="margin-bottom:0">
+          <a href="tel:+918630401284" style="color:var(--accent-ink)">+91 86304 01284</a>
+          &nbsp;&middot;&nbsp;
+          <a href="mailto:prince324yadav@gmail.com" style="color:var(--accent-ink)">prince324yadav@gmail.com</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band cta" id="talk">
+  <div class="wrap">
+    <p class="kicker">Next step</p>
+    <h2>Twenty minutes, on your campus.</h2>
+    <p class="lede">No deck and no pressure. I come to you, show you what a session actually looks like, and you decide whether a free pilot term is worth trying.</p>
+    <a class="btn lg" href="tel:+918630401284">Call +91 86304 01284</a>
+    <div class="formwrap">
+      <form id="visitform" novalidate>
+        <p hidden><label>Leave this empty: <input name="hp" id="f-hp" tabindex="-1" autocomplete="off"></label></p>
+        <input type="hidden" name="t" value="nq-8f3d2a">
+        <input type="hidden" name="when" id="f-when">
+        <div class="fgrid">
+          <div class="field"><label for="f-school">School</label>
+            <input id="f-school" name="school" type="text" placeholder="St. Joseph's Academy" required></div>
+          <div class="field"><label for="f-name">Your name</label>
+            <input id="f-name" name="name" type="text" placeholder="Name and role" required></div>
+          <div class="field"><label for="f-phone">Mobile number</label>
+            <div class="phonewrap">
+              <span class="pfx">+91</span>
+              <input id="f-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national"
+                     maxlength="10" pattern="[6-9][0-9]{9}" placeholder="98765 43210" required>
+            </div>
+            <p class="fhint">10 digits, starting 6 to 9</p></div>
+          <div class="field"><label for="f-date">Preferred date</label>
+            <input id="f-date" name="vdate" type="date" required>
+            <p class="fhint">Monday to Saturday</p></div>
+          <div class="field"><label for="f-slot">Time slot</label>
+            <select id="f-slot" name="slot" required>
+              <option value="">Choose a slot</option>
+              <option>09:00 &ndash; 10:00</option>
+              <option>10:00 &ndash; 11:00</option>
+              <option>11:00 &ndash; 12:00</option>
+              <option>12:00 &ndash; 13:00</option>
+              <option>14:00 &ndash; 15:00</option>
+              <option>15:00 &ndash; 16:00</option>
+            </select>
+            <p class="fhint">School hours, 20 minutes is enough</p></div>
+          <div class="field wide"><label for="f-note">Anything I should know</label>
+            <textarea id="f-note" name="note" placeholder="Classes you have in mind, timetable constraints, or a question"></textarea></div>
+        </div>
+        <div class="fsend">
+          <button class="btn lg" type="submit">Send request</button>
+          <p class="fnote" style="margin:0">Goes straight to Prince. You will get a reply the same day. Your details are used to arrange the visit and nothing else.</p>
+        </div>
+        <div class="fstatus" id="f-status"><span class="spin"></span><span id="f-status-t">Sending your request</span></div>
+      </form>
+
+      <iframe name="nq-sink" id="nq-sink" title="form target"></iframe>
+
+      <div id="sent-ok" hidden>
+        <h3>Request sent.</h3>
+        <p>I have it, and I will call you today.</p>
+        <p style="margin-bottom:20px">Want it confirmed straight away? Send me a quick WhatsApp &mdash; it takes one tap and means I can reach you faster.</p>
+        <a class="btn lg" id="wa-btn" href="#" target="_blank" rel="noopener">Confirm on WhatsApp</a>
+        <p class="fnote" style="margin:18px 0 0">Optional. Nothing is sent until you press send in WhatsApp.
+           Or just call <a href="tel:+918630401284">+91 86304 01284</a>.</p>
+      </div>
+    </div>
+    <dl class="cta-grid">
+      <div><dt>Phone</dt><dd><a href="tel:+918630401284">+91 86304 01284</a></dd></div>
+      <div><dt>Email</dt><dd><a href="mailto:prince324yadav@gmail.com">prince324yadav@gmail.com</a></dd></div>
+      <div><dt>Serving</dt><dd>Dehradun &amp; Mussoorie schools</dd></div>
+    </dl>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap f">
+    <span>next<b style="color:var(--accent);font-weight:500">ai</b>Qlabs</span>
+    <span>Dehradun, Uttarakhand</span>
+    <span>+91 86304 01284</span>
+    <span>First pilot term free</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var rail = document.getElementById('rail');
+  if(!rail) return;
+  var rows = rail.querySelectorAll('.rail-row');
+  if(!rows.length) return;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var i = 0, paused = false;
+  rail.addEventListener('mouseenter', function(){ paused = true; });
+  rail.addEventListener('mouseleave', function(){ paused = false; });
+  Array.prototype.forEach.call(rows, function(r, n){
+    r.addEventListener('mouseenter', function(){
+      Array.prototype.forEach.call(rows, function(x){ x.classList.remove('on'); });
+      r.classList.add('on'); i = n;
+    });
+  });
+  if(reduce) return;
+  setInterval(function(){
+    if(paused) return;
+    rows[i].classList.remove('on');
+    i = (i + 1) % rows.length;
+    rows[i].classList.add('on');
+  }, 2100);
+})();
+
+(function(){
+  var bar = document.getElementById('prog');
+  if(bar){
+    var tick = function(){
+      var h = document.documentElement;
+      var max = h.scrollHeight - h.clientHeight;
+      bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+    };
+    tick();
+    window.addEventListener('scroll', tick, {passive:true});
+    window.addEventListener('resize', tick);
+  }
+
+  /* ----------------------------------------------------------------
+     PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL BETWEEN THE QUOTES.
+     Until you do, the form falls back to opening a pre-filled email.
+     ---------------------------------------------------------------- */
+  var SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzs9JlnHu0RygXq7nskJ3qrFpdKKSFtSxAhGXtZJvlM-DhS3v4fEzxf8AxJXamLfDw/exec';
+
+  var form    = document.getElementById('visitform');
+  var sink    = document.getElementById('nq-sink');
+  var okPanel = document.getElementById('sent-ok');
+  var status  = document.getElementById('f-status');
+  var statusT = document.getElementById('f-status-t');
+  var dateEl  = document.getElementById('f-date');
+  var phoneEl = document.getElementById('f-phone');
+
+  var MOBILE = /^[6-9][0-9]{9}$/;
+  var DAYS   = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+  function ymd(d){
+    return d.getFullYear() + '-' +
+           ('0' + (d.getMonth() + 1)).slice(-2) + '-' +
+           ('0' + d.getDate()).slice(-2);
+  }
+
+  // date window: tomorrow to six weeks out
+  if(dateEl){
+    var from = new Date(); from.setDate(from.getDate() + 1);
+    var to   = new Date(); to.setDate(to.getDate() + 42);
+    dateEl.min = ymd(from);
+    dateEl.max = ymd(to);
+  }
+
+  // phone: digits only, strip a pasted +91 or leading 0
+  if(phoneEl){
+    phoneEl.addEventListener('input', function(){
+      var v = phoneEl.value.replace(/\D/g, '');
+      if(v.length > 10 && v.indexOf('91') === 0) v = v.slice(2);
+      if(v.length > 10 && v.charAt(0) === '0')   v = v.slice(1);
+      phoneEl.value = v.slice(0, 10);
+      phoneEl.classList.toggle('bad', phoneEl.value.length === 10 && !MOBILE.test(phoneEl.value));
+    });
+  }
+
+  if(form && sink){
+    form.setAttribute('action', SHEET_ENDPOINT);
+    form.setAttribute('method', 'POST');
+    form.setAttribute('target', 'nq-sink');
+    form.setAttribute('enctype', 'application/x-www-form-urlencoded');
+
+    var sending = false, timer = null, btn = null, last = null;
+
+    function setStatus(text, isErr){
+      if(!status) return;
+      status.classList.add('on');
+      status.classList.toggle('err', !!isErr);
+      if(statusT) statusT.textContent = text;
+      var sp = status.querySelector('.spin');
+      if(sp) sp.style.display = isErr ? 'none' : '';
+    }
+    function fail(el, msg){
+      if(el){ el.classList.add('bad'); el.focus(); }
+      setStatus(msg, true);
+    }
+    function buildWhatsApp(){
+      var a = document.getElementById('wa-btn');
+      if(!a || !last) return;
+      var msg = 'Hi Prince, this is ' + last.name + ' from ' + last.school + '. '
+              + 'I have just requested a campus visit for ' + last.when + '. '
+              + 'My number is +91 ' + last.phone + '.';
+      a.setAttribute('href', 'https://wa.me/918630401284?text=' + encodeURIComponent(msg));
+    }
+
+    function succeed(){
+      if(!sending) return;
+      sending = false;
+      clearTimeout(timer);
+      buildWhatsApp();
+      if(status) status.classList.remove('on');
+      form.hidden = true;
+      if(okPanel){
+        okPanel.hidden = false;
+        try { okPanel.scrollIntoView({block:'nearest', behavior:'smooth'}); } catch(e){}
+      }
+    }
+    sink.addEventListener('load', function(){ if(sending) succeed(); });
+
+    form.addEventListener('submit', function(e){
+      var g = function(id){ var el = document.getElementById(id); return el ? el.value.trim() : ''; };
+      var school = g('f-school'), name = g('f-name'), phone = g('f-phone'),
+          vdate  = g('f-date'),   slot = g('f-slot');
+
+      if(g('f-hp')){ e.preventDefault(); return; }
+
+      ['f-school','f-name','f-phone','f-date','f-slot'].forEach(function(id){
+        var el = document.getElementById(id); if(el) el.classList.remove('bad');
+      });
+
+      if(!school){ e.preventDefault(); return fail(document.getElementById('f-school'), 'Please enter the school name'); }
+      if(!name)  { e.preventDefault(); return fail(document.getElementById('f-name'),   'Please enter your name'); }
+
+      if(!MOBILE.test(phone)){
+        e.preventDefault();
+        return fail(phoneEl, 'Enter a valid 10 digit mobile number starting 6 to 9');
+      }
+
+      if(!vdate){ e.preventDefault(); return fail(dateEl, 'Please choose a date for the visit'); }
+      var d = new Date(vdate + 'T00:00:00');
+      if(isNaN(d.getTime())){ e.preventDefault(); return fail(dateEl, 'That date is not valid'); }
+      var today = new Date(); today.setHours(0,0,0,0);
+      if(d <= today){ e.preventDefault(); return fail(dateEl, 'Please choose a date from tomorrow onwards'); }
+      if(d.getDay() === 0){ e.preventDefault(); return fail(dateEl, 'Sundays are not available. Monday to Saturday please'); }
+
+      if(!slot){ e.preventDefault(); return fail(document.getElementById('f-slot'), 'Please choose a time slot'); }
+      if(d.getDay() === 6 && parseInt(slot.slice(0,2), 10) >= 12){
+        e.preventDefault();
+        return fail(document.getElementById('f-slot'), 'Saturdays finish at 12:00. Please pick an earlier slot');
+      }
+
+      // compose the readable line that lands in the sheet
+      var whenEl = document.getElementById('f-when');
+      if(whenEl){
+        whenEl.value = DAYS[d.getDay()] + ', ' + d.getDate() + ' ' +
+                       MONTHS[d.getMonth()] + ' ' + d.getFullYear() + ' at ' + slot;
+      }
+
+      if(navigator.onLine === false){
+        e.preventDefault();
+        return setStatus('You appear to be offline. Please call +91 86304 01284', true);
+      }
+
+      last = { school: school, name: name, phone: phone,
+               when: (whenEl && whenEl.value) ? whenEl.value : (vdate + ' ' + slot) };
+
+      sending = true;
+      btn = form.querySelector('button[type="submit"]');
+      if(btn){ btn.disabled = true; btn.textContent = 'Sending...'; }
+      setStatus('Sending your request');
+      clearTimeout(timer);
+      timer = setTimeout(succeed, 1800);
+    });
+  }
+})();
+</script>
