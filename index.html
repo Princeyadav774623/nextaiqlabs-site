@@ -32,26 +32,7 @@
 "description":"Seven studios inside your school for Classes 6 to 12.",
 "areaServed":{"@type":"City","name":"Dehradun"},
 "address":{"@type":"PostalAddress","addressLocality":"Dehradun","addressRegion":"Uttarakhand","addressCountry":"IN"},
-"founder":{"@type":"Person","name":"Prince Yadav"}}
-(function(){
-  var stage = document.querySelector('.kit-stage');
-  if(!stage) return;
-  var spots = [].slice.call(stage.querySelectorAll('.hs'));
-  function closeAll(except){
-    spots.forEach(function(b){ if(b!==except) b.setAttribute('aria-expanded','false'); });
-  }
-  spots.forEach(function(b){
-    b.addEventListener('click', function(e){
-      e.stopPropagation();
-      var open = b.getAttribute('aria-expanded') === 'true';
-      closeAll(b);
-      b.setAttribute('aria-expanded', open ? 'false' : 'true');
-    });
-  });
-  document.addEventListener('click', function(){ closeAll(null); });
-  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeAll(null); });
-})();
-</script>
+"founder":{"@type":"Person","name":"Prince Yadav"}}</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -437,70 +418,49 @@ footer .f{display:flex;flex-wrap:wrap;gap:12px 32px;align-items:baseline;
     .cinema-in{animation:nq-lift linear both;animation-timeline:view();animation-range:entry 16% entry 72%}
   }
 }
-/* ---------- interactive kit stage ---------- */
-.kitsec{background:var(--dark);color:var(--dark-ink);
-        padding:clamp(46px,6vw,78px) 0 clamp(34px,4.6vw,58px)}
-.kit-head{max-width:720px;margin-bottom:clamp(22px,3vw,34px)}
-.kit-eye{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;font-weight:500;
-  letter-spacing:.17em;text-transform:uppercase;color:var(--accent-lite);margin:0 0 14px}
-.kit-h{font-family:"Newsreader",Georgia,serif;font-weight:400;font-size:clamp(26px,3.4vw,42px);
-  line-height:1.12;letter-spacing:-.018em;color:#FFF;margin:0 0 14px}
+/* ---------- kit band ---------- */
+.kitsec{background:var(--dark);color:var(--dark-ink);padding-bottom:clamp(44px,5.5vw,72px)}
+.kit-shot{position:relative;height:clamp(230px,40vw,500px);overflow:hidden;
+  background:var(--dark);isolation:isolate}
+.kit-shot-in{position:absolute;inset:-6% 0;will-change:transform}
+.kit-shot-in img{width:100%;height:100%;object-fit:cover;display:block;
+  filter:saturate(.95) contrast(1.03)}
+.kit-shot::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(16,18,22,.34) 0%,rgba(16,18,22,0) 22%,
+             rgba(16,18,22,0) 58%,rgba(16,18,22,.96) 100%)}
+.kit-body{padding-top:clamp(26px,3.4vw,40px)}
+.kit-head{max-width:640px;margin-bottom:clamp(26px,3.4vw,40px)}
+.kit-eye{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10px;font-weight:500;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lite);margin:0 0 13px}
+.kit-head h2{font-family:"Newsreader",Georgia,serif;font-weight:400;
+  font-size:clamp(25px,3.3vw,40px);line-height:1.13;letter-spacing:-.018em;color:#FFF;margin:0 0 14px}
 .kit-sub{font-size:clamp(14.5px,1.5vw,16.5px);color:var(--dark-ink-2);margin:0}
-.kit-hint{display:inline-flex;align-items:center;gap:9px;margin:16px 0 0;
-  font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10px;letter-spacing:.13em;
-  text-transform:uppercase;color:var(--dark-ink-3)}
-.kit-hint i{width:9px;height:9px;border-radius:50%;background:var(--accent);flex:none;
-  box-shadow:0 0 0 4px rgba(192,71,42,.22)}
-.kit-stage{position:relative;max-width:1180px;margin:0 auto;aspect-ratio:1600/1066;
-  border-radius:6px;overflow:hidden;border:1px solid var(--dark-line)}
-.kit-stage img{width:100%;height:100%;object-fit:cover;display:block}
-.hs{position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);
-  width:30px;height:30px;padding:0;border:0;background:none;cursor:pointer;z-index:2;
-  -webkit-tap-highlight-color:transparent}
-.hs::before{content:"";position:absolute;inset:10px;border-radius:50%;background:var(--accent);
-  border:1.5px solid rgba(255,255,255,.9);transition:transform .18s ease}
-.hs::after{content:"";position:absolute;inset:4px;border-radius:50%;
-  border:1.5px solid rgba(228,98,63,.75);opacity:0;transition:opacity .2s ease}
-.hs:hover::before,.hs:focus-visible::before,.hs[aria-expanded="true"]::before{transform:scale(1.35)}
-.hs:hover::after,.hs:focus-visible::after,.hs[aria-expanded="true"]::after{opacity:1}
-.hs:focus-visible{outline:2px solid #FFF;outline-offset:3px;border-radius:50%}
-@media(prefers-reduced-motion:no-preference){
-  .hs::after{animation:hs-ping 2.6s ease-out infinite}
-  @keyframes hs-ping{0%{opacity:.85;transform:scale(.7)}70%,100%{opacity:0;transform:scale(1.6)}}
-  .hs:hover::after,.hs[aria-expanded="true"]::after{animation:none;opacity:1}
-}
-.hs-card{position:absolute;left:50%;bottom:calc(100% + 13px);transform:translateX(-50%) translateY(6px);
-  width:min(268px,74vw);background:rgba(12,14,18,.96);border:1px solid var(--dark-line);
-  border-radius:5px;padding:14px 15px 13px;text-align:left;opacity:0;visibility:hidden;
-  transition:opacity .18s ease,transform .18s ease,visibility .18s;pointer-events:none;z-index:5;
-  box-shadow:0 18px 40px -16px rgba(0,0,0,.8)}
-.hs:hover .hs-card,.hs:focus-visible .hs-card,.hs[aria-expanded="true"] .hs-card{
-  opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
-.hs.edge-l .hs-card{left:0;transform:translateX(0) translateY(6px)}
-.hs.edge-l:hover .hs-card,.hs.edge-l:focus-visible .hs-card,.hs.edge-l[aria-expanded="true"] .hs-card{transform:translateX(0) translateY(0)}
-.hs.edge-r .hs-card{left:auto;right:0;transform:translateX(0) translateY(6px)}
-.hs.edge-r:hover .hs-card,.hs.edge-r:focus-visible .hs-card,.hs.edge-r[aria-expanded="true"] .hs-card{transform:translateX(0) translateY(0)}
-.hs.below .hs-card{bottom:auto;top:calc(100% + 13px)}
-.hs-n{display:block;font-family:"Newsreader",Georgia,serif;font-size:17px;color:#FFF;
-  line-height:1.2;margin-bottom:6px}
-.hs-d{display:block;font-family:"IBM Plex Sans",-apple-system,sans-serif;font-size:12.8px;
-  line-height:1.45;color:var(--dark-ink-2);margin-bottom:9px}
-.hs-s{display:block;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:9px;
-  letter-spacing:.13em;text-transform:uppercase;color:var(--accent-lite)}
-.kit-list{display:none;margin:20px 0 0;padding:0;list-style:none;
-  flex-wrap:wrap;gap:7px}
-.kit-list li{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10px;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--dark-ink-2);border:1px solid var(--dark-line);
-  border-radius:2px;padding:6px 10px}
-@media(max-width:760px){
-  .hs{display:none}
-  .kit-hint{display:none}
-  .kit-list{display:flex}
-}
-@keyframes kit-in{from{opacity:.3;transform:scale(1.035)}to{opacity:1;transform:none}}
+.kit-grid{display:grid;gap:1px;background:var(--dark-line);
+  border:1px solid var(--dark-line);border-radius:5px;overflow:hidden;
+  grid-template-columns:1fr}
+@media(min-width:620px){.kit-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:1000px){.kit-grid{grid-template-columns:repeat(4,1fr)}}
+.kc{background:var(--dark-2);padding:0 0 20px;min-width:0}
+.kc picture{display:block;line-height:0}
+.kc img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;display:block;
+  border-bottom:1px solid var(--dark-line)}
+.kc h3{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;font-weight:500;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--accent-lite);
+  margin:18px 20px 9px}
+.kc p{font-size:13.5px;line-height:1.5;color:var(--dark-ink-2);margin:0 20px}
+@keyframes kit-drift{from{transform:translateY(-2%)}to{transform:translateY(2%)}}
+@keyframes kit-clear{from{filter:saturate(.5) contrast(1.03) blur(13px)}
+                     to{filter:saturate(.95) contrast(1.03) blur(0)}}
+@keyframes kc-in{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
 @supports (animation-timeline:view()){
   @media(prefers-reduced-motion:no-preference){
-    .kit-stage{animation:kit-in linear both;animation-timeline:view();animation-range:entry 8% entry 64%}
+    .kit-shot-in{animation:kit-drift linear both;animation-timeline:view();animation-range:entry 0% exit 100%}
+    .kit-shot-in img{animation:kit-clear linear both;animation-timeline:view();animation-range:entry 4% entry 56%}
+    .kc{animation:kc-in linear both;animation-timeline:view()}
+    .kc:nth-child(1){animation-range:entry 12% entry 34%}
+    .kc:nth-child(2){animation-range:entry 17% entry 39%}
+    .kc:nth-child(3){animation-range:entry 22% entry 44%}
+    .kc:nth-child(4){animation-range:entry 27% entry 49%}
   }
 }
 </style>
@@ -564,40 +524,31 @@ footer .f{display:flex;flex-wrap:wrap;gap:12px 32px;align-items:baseline;
 </header>
 
 <section class="kitsec" id="kit" aria-labelledby="kit-h">
-  <div class="wrap">
+  <div class="kit-shot"><div class="kit-shot-in"><img src="kit.jpg" decoding="async" loading="lazy" width="1600" height="1066" alt="The nextaiQlabs kit laid out: Arduino Uno, ESP32, Raspberry Pi, breadboard, ultrasonic, motion and soil sensors, servo, jumper wires and printed parts"></div></div>
+  <div class="wrap kit-body">
     <div class="kit-head">
       <p class="kit-eye">What we bring</p>
-      <h2 class="kit-h" id="kit-h">The whole kit arrives with us, and leaves with us.</h2>
-      <p class="kit-sub">Boards, sensors, prototyping parts and printed components &mdash; enough for a full section to build with. The school buys nothing and stores nothing.</p>
-      <p class="kit-hint"><i></i>Tap a point to see what it does</p>
+      <h2 id="kit-h">Every part arrives with us, and leaves with us.</h2>
+      <p class="kit-sub">Boards, sensors and prototyping parts, enough for a full section to build with. The school buys nothing, stores nothing and maintains nothing.</p>
     </div>
-  </div>
-  <div class="wrap">
-  <div class="kit-stage">
-    <img src="kit.jpg" decoding="async" loading="lazy" width="1600" height="1066" alt="The nextaiQlabs kit laid out: Arduino Uno, ESP32, Raspberry Pi, breadboards, ultrasonic and motion sensors, servo, jumper wires and prototyping parts">
-    <button class="hs below" style="--x:33%;--y:24%" aria-expanded="false" aria-label="Arduino Uno">
-      <span class="hs-card"><span class="hs-n">Arduino Uno</span><span class="hs-d">The board most students write their first hardware program on.</span><span class="hs-s">Maker Studio</span></span>
-    </button>
-    <button class="hs below" style="--x:62%;--y:23%" aria-expanded="false" aria-label="Raspberry Pi 4">
-      <span class="hs-card"><span class="hs-n">Raspberry Pi 4</span><span class="hs-d">A full computer small enough to live inside a project. Runs the vision model.</span><span class="hs-s">Engineering Studio</span></span>
-    </button>
-    <button class="hs" style="--x:33%;--y:43%" aria-expanded="false" aria-label="Breadboard">
-      <span class="hs-card"><span class="hs-n">Breadboard</span><span class="hs-d">Where a circuit gets built, broken and rebuilt. No soldering, no permanent mistakes.</span><span class="hs-s">Maker Studio</span></span>
-    </button>
-    <button class="hs" style="--x:51%;--y:40%" aria-expanded="false" aria-label="Ultrasonic sensor">
-      <span class="hs-card"><span class="hs-n">Ultrasonic sensor</span><span class="hs-d">Measures distance without touching anything. This is what reads the school water tank.</span><span class="hs-s">Maker Studio</span></span>
-    </button>
-    <button class="hs" style="--x:64%;--y:57%" aria-expanded="false" aria-label="Soil moisture probe">
-      <span class="hs-card"><span class="hs-n">Soil moisture probe</span><span class="hs-d">Tells you the garden needs water before the plants start showing it.</span><span class="hs-s">Maker &middot; Intelligence</span></span>
-    </button>
-    <button class="hs" style="--x:77%;--y:57%" aria-expanded="false" aria-label="Motion sensor">
-      <span class="hs-card"><span class="hs-n">Motion sensor</span><span class="hs-d">Detects a person entering a room. This one sits behind the classroom energy check.</span><span class="hs-s">Maker Studio</span></span>
-    </button>
-    <button class="hs" style="--x:76%;--y:82%" aria-expanded="false" aria-label="3D printed parts">
-      <span class="hs-card"><span class="hs-n">3D printed parts</span><span class="hs-d">Designed in session three, printed, and fitted to the build in session eight.</span><span class="hs-s">Creator Studio</span></span>
-    </button>
-  </div>
-  <ul class="kit-list"><li>Arduino Uno</li><li>Raspberry Pi 4</li><li>Breadboard</li><li>Ultrasonic sensor</li><li>Soil moisture probe</li><li>Motion sensor</li><li>3D printed parts</li></ul>
+    <div class="kit-grid">
+      <article class="kc">
+        <picture><source srcset="c-arduino.webp" type="image/webp"><img src="c-arduino.jpg" width="620" height="465" loading="lazy" decoding="async" alt="Arduino Uno"></picture>
+        <h3>Arduino Uno</h3><p>The first board a student writes a program for. Session four: first program, first bug, first fix.</p>
+      </article>
+      <article class="kc">
+        <picture><source srcset="c-ultrasonic.webp" type="image/webp"><img src="c-ultrasonic.jpg" width="620" height="465" loading="lazy" decoding="async" alt="Ultrasonic sensor"></picture>
+        <h3>Ultrasonic sensor</h3><p>Measures distance without touching anything. This is what reads the school water tank.</p>
+      </article>
+      <article class="kc">
+        <picture><source srcset="c-soil.webp" type="image/webp"><img src="c-soil.jpg" width="620" height="465" loading="lazy" decoding="async" alt="Soil and rain sensors"></picture>
+        <h3>Soil and rain sensors</h3><p>Report when the garden needs water, before the plants start showing it.</p>
+      </article>
+      <article class="kc">
+        <picture><source srcset="c-printed.webp" type="image/webp"><img src="c-printed.jpg" width="620" height="465" loading="lazy" decoding="async" alt="Printed parts"></picture>
+        <h3>Printed parts</h3><p>Designed in session three, printed, and fitted to the build in session eight.</p>
+      </article>
+    </div>
   </div>
 </section>
 
@@ -1089,6 +1040,7 @@ footer .f{display:flex;flex-wrap:wrap;gap:12px 32px;align-items:baseline;
     });
   }
 })();
+
 </script>
 </body>
 </html>
