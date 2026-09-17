@@ -390,6 +390,35 @@ footer .f{display:flex;flex-wrap:wrap;gap:12px 32px;align-items:baseline;
       animation:nq-fade linear both;animation-timeline:view();animation-range:entry 2% entry 26%}
   }
 }
+/* ---------- cinema band ---------- */
+.cinema{position:relative;background:var(--dark);overflow:hidden;isolation:isolate}
+.cinema-media{position:absolute;inset:-7% 0;will-change:transform}
+.cinema-media img{width:100%;height:100%;object-fit:cover;display:block;
+  filter:saturate(.9) contrast(1.04) brightness(.92)}
+.cinema-shade{position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg,rgba(16,18,22,.50) 0%,rgba(16,18,22,.16) 26%,rgba(16,18,22,.55) 55%,rgba(16,18,22,.88) 76%,rgba(16,18,22,.96) 100%)}
+.cinema-tint{position:absolute;inset:0;z-index:2;background:var(--accent);
+  opacity:.07;mix-blend-mode:soft-light;pointer-events:none}
+.cinema-body{position:relative;z-index:3;min-height:clamp(430px,64vh,700px);
+  display:flex;align-items:flex-end;padding:clamp(34px,6vw,76px) 0}
+.cinema-in{max-width:760px}
+.cinema-eye{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;font-weight:500;
+  letter-spacing:.17em;text-transform:uppercase;color:var(--accent-lite);margin:0 0 16px}
+.cinema-h{font-family:"Newsreader",Georgia,serif;font-weight:400;
+  font-size:clamp(28px,4.2vw,50px);line-height:1.1;letter-spacing:-.018em;color:#FFF;margin:0}
+.cinema-h em{font-style:italic;color:var(--accent-lite)}
+.cinema-note{font-size:clamp(13.5px,1.45vw,15.5px);color:var(--dark-ink);opacity:.8;margin:18px 0 0;max-width:520px}
+@keyframes nq-pan{from{transform:translateY(-2.4%)}to{transform:translateY(2.4%)}}
+@keyframes nq-focus{from{filter:saturate(.45) contrast(1.04) brightness(.92) blur(15px)}
+                    to{filter:saturate(.9) contrast(1.04) brightness(.92) blur(0)}}
+@keyframes nq-lift{from{opacity:.18;transform:translateY(22px)}to{opacity:1;transform:none}}
+@supports (animation-timeline:view()){
+  @media(prefers-reduced-motion:no-preference){
+    .cinema-media{animation:nq-pan linear both;animation-timeline:view();animation-range:entry 0% exit 100%}
+    .cinema-media img{animation:nq-focus linear both;animation-timeline:view();animation-range:entry 6% entry 62%}
+    .cinema-in{animation:nq-lift linear both;animation-timeline:view();animation-range:entry 16% entry 72%}
+  }
+}
 </style>
 </head>
 <body>
@@ -545,6 +574,21 @@ footer .f{display:flex;flex-wrap:wrap;gap:12px 32px;align-items:baseline;
       </div>
     </article>
   </div>
+</section>
+
+<section class="cinema" aria-labelledby="cinema-h">
+  <div class="cinema-media">
+    <picture>
+      <source srcset="studio.webp" type="image/webp">
+      <img src="studio.jpg" alt="A working studio session: students at laptops building and testing a project together" loading="lazy" decoding="async" width="1800" height="1013">
+    </picture>
+  </div>
+  <div class="cinema-shade"></div><div class="cinema-tint"></div>
+  <div class="cinema-body"><div class="wrap"><div class="cinema-in">
+    <p class="cinema-eye">From learning &middot; to doing &middot; to impact</p>
+    <h2 class="cinema-h" id="cinema-h">Seven studios, one build, and a student who can <em>explain every part of it</em>.</h2>
+    <p class="cinema-note">An illustration of how a session runs &mdash; the design, the code and the hardware in one room, at one table.</p>
+  </div></div></div>
 </section>
 
 <section class="band" id="term" style="background:var(--surface-2)">
