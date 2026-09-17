@@ -3,7 +3,7 @@
 Marketing site for nextaiQlabs, a seven-studio AI and maker programme that runs
 inside schools in Dehradun.
 
-Live site: (add the Netlify URL here once deployed)
+Live site: https://nextaiqlabs.online
 
 ## What is in here
 
