@@ -258,6 +258,32 @@ footer .f a{color:var(--dark-ink-2);text-decoration:none;display:inline-flex;ali
 footer .f a:hover,footer .f a:focus-visible{color:var(--dark-ink)}
 footer .f svg{width:13px;height:13px;flex:none;fill:currentColor}
 
+/* ---------- framed figures ---------- */
+.figs{margin:clamp(32px,4.2vw,54px) 0 0;display:grid;gap:clamp(13px,1.7vw,20px);grid-template-columns:1fr}
+@media(min-width:820px){.figs.two{grid-template-columns:1.33fr 1fr}}
+figure.fg{margin:0;display:flex;flex-direction:column;min-width:0;
+  background:var(--surface);border:1px solid var(--line);border-radius:5px;overflow:hidden}
+figure.fg .fg-win{overflow:hidden;line-height:0;background:var(--surface-2)}
+figure.fg img{width:100%;height:100%;display:block;object-fit:cover}
+figure.fg figcaption{flex:1;padding:13px 16px 15px;border-top:1px solid var(--line);
+  font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10.5px;line-height:1.75;
+  letter-spacing:.055em;color:var(--ink-3)}
+figure.fg figcaption b{display:block;font-weight:500;letter-spacing:.17em;
+  text-transform:uppercase;color:var(--accent-ink);margin-bottom:5px}
+.fg-a .fg-win{aspect-ratio:16/9}
+.fg-b .fg-win{aspect-ratio:4/3}
+.fg-wide .fg-win{aspect-ratio:1300/896}
+@media(max-width:819px){.fg-b .fg-win{aspect-ratio:16/10}}
+@keyframes fg-in{from{opacity:.18;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes fg-zoom{from{transform:scale(1.06)}to{transform:scale(1)}}
+@supports (animation-timeline:view()){
+  @media(prefers-reduced-motion:no-preference){
+    figure.fg{animation:fg-in cubic-bezier(.22,.61,.36,1) both;animation-timeline:view();animation-range:entry 8% entry 44%}
+    .figs.two figure.fg:nth-child(2){animation-range:entry 13% entry 49%}
+    figure.fg img{animation:fg-zoom cubic-bezier(.22,.61,.36,1) both;animation-timeline:view();animation-range:entry 2% entry 66%}
+  }
+}
+
 /* ---------- cta ---------- */
 .cta{background:var(--accent);color:#FFF;position:relative;overflow:hidden;isolation:isolate}
 .cta::after{content:"";position:absolute;inset:0;z-index:-1;opacity:.07;pointer-events:none;
@@ -549,7 +575,7 @@ footer .f{display:flex;flex-wrap:wrap;gap:12px 32px;align-items:baseline;
 </header>
 
 <section class="kitsec" id="kit" aria-labelledby="kit-h">
-  <div class="kit-shot"><div class="kit-shot-in"><img src="kit.jpg" decoding="async" loading="lazy" width="1600" height="1066" alt="The nextaiQlabs kit laid out: Arduino Uno, ESP32, Raspberry Pi, breadboard, ultrasonic, motion and soil sensors, servo, jumper wires and printed parts"></div></div>
+  <div class="kit-shot"><div class="kit-shot-in"><picture><source srcset="k-circuit.ac0eccab.webp" type="image/webp"><img src="k-circuit.533b12ab.jpg" decoding="async" loading="lazy" width="1000" height="500" alt="An Arduino Uno wired across a breadboard to a temperature sensor and an indicator LED, with an ultrasonic sensor and jumper wires alongside"></picture></div></div>
   <div class="wrap kit-body">
     <div class="kit-head">
       <p class="kit-eye">What we bring</p>
@@ -599,6 +625,7 @@ footer .f{display:flex;flex-wrap:wrap;gap:12px 32px;align-items:baseline;
       <div><p class="kicker">The studios</p><h2 style="margin:0">Seven studios, one arc.</h2></div>
       <p class="lede" style="margin:0">Each studio runs in short cycles and ends with something the student built, can demonstrate, and can explain to somebody else. Together they take a student from understanding the technology to standing in front of a room and explaining what they made with it.</p>
     </div>
+
 
     <article class="studio">
       <div class="st-left"><span class="st-num">01</span><h3 class="st-name">Intelligence Studio</h3><p class="st-tag">Learn how the future works.</p></div>
@@ -666,6 +693,15 @@ footer .f{display:flex;flex-wrap:wrap;gap:12px 32px;align-items:baseline;
         <div class="outcome"><span>Outcome</span><b>Future-Ready Professionals</b></div>
       </div>
     </article>
+
+    <div class="figs">
+      <figure class="fg fg-wide">
+        <div class="fg-win"><picture><source srcset="p-board.949beb44.webp" type="image/webp">
+          <img src="p-board.56764ee9.jpg" width="1300" height="896" loading="lazy" decoding="async"
+               alt="A whiteboard plan for a school session: introduction, hands-on activity, showcase and next steps, with the tools used and a list of project ideas"></picture></div>
+        <figcaption><b>Illustration</b>How a session is planned before we arrive &mdash; the running order, the tools the students will touch, and the projects on offer.</figcaption>
+      </figure>
+    </div>
   </div>
 </section>
 
@@ -704,6 +740,21 @@ footer .f{display:flex;flex-wrap:wrap;gap:12px 32px;align-items:baseline;
       <div class="wk"><b>Session 11</b><span>Deployment. It goes live, on a real URL, that a parent can open.</span></div>
       <div class="wk final"><b>Session 12</b><span>Demo day. The student presents, and the room is allowed to ask hard questions.</span></div>
     </div>
+    <div class="figs two">
+      <figure class="fg fg-a">
+        <div class="fg-win"><picture><source srcset="p-note.fab46411.webp" type="image/webp">
+          <img src="p-note.1b59952f.jpg" width="1300" height="731" loading="lazy" decoding="async"
+               alt="A session plan written out by hand: objectives, the flow from intro to demo, the materials needed, project ideas and next steps"></picture></div>
+        <figcaption><b>Illustration</b>A week laid out before it runs &mdash; objectives, timings, materials, and the projects a group can choose from.</figcaption>
+      </figure>
+      <figure class="fg fg-b">
+        <div class="fg-win"><picture><source srcset="p-trex.8dde4a46.webp" type="image/webp">
+          <img src="p-trex.b64fa385.jpg" width="810" height="608" loading="lazy" decoding="async"
+               alt="An articulated dinosaur printed in one piece, held in a hand"></picture></div>
+        <figcaption><b>Illustration</b>The kind of part that comes off the printer in the Maker Studio &mdash; designed on screen, printed, then fitted to the build.</figcaption>
+      </figure>
+    </div>
+
     <p class="lede" style="margin:26px 0 0;max-width:62ch;font-size:15.5px;color:var(--ink-3)">Sample arc for one studio. The other six run the same way &mdash; short cycles, a finished artefact, and a demo the student presents themselves.</p>
   </div>
 </section>
