@@ -32,7 +32,7 @@
 "description":"Seven studios inside your school for Classes 6 to 12.",
 "areaServed":{"@type":"City","name":"Dehradun"},
 "address":{"@type":"PostalAddress","addressLocality":"Dehradun","addressRegion":"Uttarakhand","addressCountry":"IN"},
-"founder":{"@type":"Person","name":"Prince Yadav"}}</script>
+"founder":{"@type":"Person","name":"Prince Yadav","jobTitle":"Founder","sameAs":["https://www.linkedin.com/in/prince-yadav-6b37471b0"]}}</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -245,6 +245,19 @@ a{color:inherit}
 @media(min-width:780px){.who{grid-template-columns:minmax(0,290px) minmax(0,1fr);gap:58px}}
 .portrait{width:100%;max-width:290px;height:auto;aspect-ratio:4/5;object-fit:cover;
           display:block;border-radius:4px;background:#FFF}
+
+.flinks{display:flex;flex-wrap:wrap;gap:10px 12px;align-items:center;margin:0;padding:0;list-style:none}
+.flink{display:inline-flex;align-items:center;gap:9px;min-height:42px;padding:9px 15px;white-space:nowrap;
+  border:1px solid var(--line);border-radius:3px;background:var(--surface);
+  color:var(--accent-ink);text-decoration:none;
+  font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;letter-spacing:.055em;
+  transition:border-color .2s ease,background .2s ease,transform .2s ease}
+.flink:hover,.flink:focus-visible{border-color:var(--accent);background:var(--accent-soft);transform:translateY(-1px)}
+.flink svg{width:15px;height:15px;flex:none;fill:currentColor;opacity:.78}
+.flink:hover svg{opacity:1}
+footer .f a{color:var(--dark-ink-2);text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+footer .f a:hover,footer .f a:focus-visible{color:var(--dark-ink)}
+footer .f svg{width:13px;height:13px;flex:none;fill:currentColor}
 
 /* ---------- cta ---------- */
 .cta{background:var(--accent);color:#FFF;position:relative;overflow:hidden;isolation:isolate}
@@ -793,11 +806,11 @@ footer .f{display:flex;flex-wrap:wrap;gap:12px 32px;align-items:baseline;
         <p class="lede">That is what I could not let go of. None of it was ever too hard for a fourteen-year-old. The theory is not the hard part; the building is, and nobody shows you that until you are already behind.</p>
         <p class="lede">nextaiQlabs exists to move it earlier. A small team, seven studios, and students who walk out with something they made and can explain.</p>
         <p class="lede" style="color:var(--ink);margin-bottom:28px">The best part of the job is the moment a student stops asking whether they can do this, and starts asking what else they could make.</p>
-        <p class="lede" style="margin-bottom:0">
-          <a href="tel:+918630401284" style="color:var(--accent-ink)">+91 86304 01284</a>
-          &nbsp;&middot;&nbsp;
-          <a href="mailto:prince324yadav@gmail.com" style="color:var(--accent-ink)">prince324yadav@gmail.com</a>
-        </p>
+        <ul class="flinks">
+          <li><a class="flink" href="tel:+918630401284">+91 86304 01284</a></li>
+          <li><a class="flink" href="mailto:prince@nextaiqlabs.online">prince@nextaiqlabs.online</a></li>
+          <li><a class="flink" href="https://www.linkedin.com/in/prince-yadav-6b37471b0" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg><span>LinkedIn</span></a></li>
+        </ul>
       </div>
     </div>
   </div>
@@ -863,7 +876,7 @@ footer .f{display:flex;flex-wrap:wrap;gap:12px 32px;align-items:baseline;
     </div>
     <dl class="cta-grid">
       <div><dt>Phone</dt><dd><a href="tel:+918630401284">+91 86304 01284</a></dd></div>
-      <div><dt>Email</dt><dd><a href="mailto:prince324yadav@gmail.com">prince324yadav@gmail.com</a></dd></div>
+      <div><dt>Email</dt><dd><a href="mailto:prince@nextaiqlabs.online">prince@nextaiqlabs.online</a></dd></div>
       <div><dt>Serving</dt><dd>Dehradun &amp; Mussoorie schools</dd></div>
     </dl>
   </div>
@@ -875,6 +888,7 @@ footer .f{display:flex;flex-wrap:wrap;gap:12px 32px;align-items:baseline;
     <span>Dehradun, Uttarakhand</span>
     <span>+91 86304 01284</span>
     <span>First pilot term free</span>
+    <span><a href="https://www.linkedin.com/in/prince-yadav-6b37471b0" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg><span>LinkedIn</span></a></span>
   </div>
 </footer>
 
